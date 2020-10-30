@@ -13,13 +13,13 @@ fi
 
 if [ $ARG_DATA_SOURCE == remote ]
 then
-    rm -rf ./temp/schilder
+    rm -rf ./temp/$AWS_S3_FOLDER
     aws s3 sync s3://nahtourband ./temp
 fi
 
-if [ ! -d ./temp/schilder ]
+if [ ! -d ./temp/$AWS_S3_FOLDER ]
 then
-	echo "ERROR: Expcted to find picture folder 'schilder' in ./temp/"
+	echo "ERROR: Expcted to find picture folder '$AWS_S3_FOLDER' in ./temp/"
 	exit
 fi
 
@@ -45,7 +45,7 @@ fi
 
 ARG_VARIANT=$3
 
-cd ./temp/schilder
+cd ./temp/$AWS_S3_FOLDER
 
 find . -exec ../../load_data.sh {} $ARG_TRACK $ARG_VARIANT \;
 
